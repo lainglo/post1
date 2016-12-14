@@ -1,0 +1,156 @@
+challenge 1
+
+data['Age'].fillna(data['Age'].median(), inplace=True)
+
+challenge 2
+
+# x axis:
+# y axis:
+# colour: 
+
+survived_sex = data[data['Survived']==1]['Sex'].value_counts()
+dead_sex = data[data['Survived']==0]['Sex'].value_counts()
+
+challenge 3
+
+
+# x axis:
+# y axis:
+# colour: 
+
+plt.hist([data[data['Survived']==1]['Age'],data[data['Survived']==0]['Age']], stacked=True, color = ['g','r'],
+         bins = 30,label = ['Survived','Dead'])
+
+
+challenge 4
+
+
+# x axis:
+# y axis:
+# colour: 
+
+figure = plt.figure(figsize=(13,8))
+plt.hist([data[data['Survived']==1]['Fare'],data[data['Survived']==0]['Fare']], stacked=True, color = ['g','r'],
+         bins = 30,label = ['Survived','Dead'])
+plt.xlabel('Fare')
+plt.ylabel('Number of passengers')
+plt.legend()
+
+challenge 5
+
+
+# x axis:
+# y axis:
+# colour: 
+
+ax.scatter(data[data['Survived']==1]['Age'],data[data['Survived']==1]['Fare'],c='green',s=40)
+ax.scatter(data[data['Survived']==0]['Age'],data[data['Survived']==0]['Fare'],c='red',s=40)
+
+challenge 6
+
+# x axis:
+# y axis:
+# colour: 
+
+survived_embark = data[data['Survived']==1]['Embarked'].value_counts()
+dead_embark = data[data['Survived']==0]['Embarked'].value_counts()
+df = pd.DataFrame([survived_embark,dead_embark])
+df.index = ['Survived','Dead']
+df.plot(kind='bar',stacked=True, figsize=(13,8))
+
+# challenge 7
+
+combined = train.append(test)
+
+challenge 8
+
+combined.shape
+
+challenge 9
+
+def process_age():
+    
+    global combined
+    
+    # a function that fills the missing values of the Age variable
+    
+    def fillAges(row):
+        if row['Sex']=='female' and row['Pclass'] == 1:
+            if row['Title'] == 'Miss':
+                return 30
+            elif row['Title'] == 'Mrs':
+                return 45
+            elif row['Title'] == 'Officer':
+                return 49
+            elif row['Title'] == 'Royalty':
+                return 39
+
+        elif row['Sex']=='female' and row['Pclass'] == 2:
+            if row['Title'] == 'Miss':
+                return 20
+            elif row['Title'] == 'Mrs':
+                return 30
+
+        elif row['Sex']=='female' and row['Pclass'] == 3:
+            if row['Title'] == 'Miss':
+                return 18
+            elif row['Title'] == 'Mrs':
+                return 31
+
+        elif row['Sex']=='male' and row['Pclass'] == 3:
+            if row['Title'] == 'Master':
+                return 6
+            elif row['Title'] == 'Mr':
+                return 26
+
+        elif row['Sex']=='male' and row['Pclass'] == 1:
+            if row['Title'] == 'Master':
+                return 6
+            elif row['Title'] == 'Mr':
+                return 41.5
+            elif row['Title'] == 'Officer':
+                return 52
+            elif row['Title'] == 'Royalty':
+                return 40
+
+        elif row['Sex']=='male' and row['Pclass'] == 2:
+            if row['Title'] == 'Master':
+                return 2
+            elif row['Title'] == 'Mr':
+                return 30
+            elif row['Title'] == 'Officer':
+                return 41.5
+
+Challenge 10
+
+combined.drop('Title',axis=1,inplace=True)
+
+Challenge 11
+
+combined.Fare.fillna(combined.Fare.mean(),inplace=True)
+
+Challenge 12
+
+    embarked_dummies = pd.get_dummies(combined['Embarked'],prefix='Embarked')
+    combined = pd.concat([combined,embarked_dummies],axis=1)
+    combined.drop('Embarked',axis=1,inplace=True)
+
+
+Challenge 13
+
+combined.Cabin.fillna('U',inplace=True)
+
+Challenge 14
+
+pclass_dummies = pd.get_dummies(combined['Pclass'],prefix="Pclass")
+
+Challenge 15
+
+    combined['SmallFamily'] = combined['FamilySize'].map(lambda s : 1 if 2<=s<=4 else 0)
+    combined['LargeFamily'] = combined['FamilySize'].map(lambda s : 1 if 5<=s else 0)
+
+
+Challenge 16
+
+clf = clf.fit(train, targets)
+
