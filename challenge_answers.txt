@@ -4,9 +4,9 @@ data['Age'].fillna(data['Age'].median(), inplace=True)
 
 challenge 2
 
-# x axis:
-# y axis:
-# colour: 
+# x axis: survived/died
+# y axis: number of people
+# colour: male/female
 
 survived_sex = data[data['Survived']==1]['Sex'].value_counts()
 dead_sex = data[data['Survived']==0]['Sex'].value_counts()
@@ -14,9 +14,9 @@ dead_sex = data[data['Survived']==0]['Sex'].value_counts()
 challenge 3
 
 
-# x axis:
-# y axis:
-# colour: 
+# x axis: age
+# y axis: number of passengers
+# colour: survived/dead
 
 plt.hist([data[data['Survived']==1]['Age'],data[data['Survived']==0]['Age']], stacked=True, color = ['g','r'],
          bins = 30,label = ['Survived','Dead'])
@@ -25,9 +25,9 @@ plt.hist([data[data['Survived']==1]['Age'],data[data['Survived']==0]['Age']], st
 challenge 4
 
 
-# x axis:
-# y axis:
-# colour: 
+# x axis: fare
+# y axis: number of passengers
+# colour: survived/dead
 
 figure = plt.figure(figsize=(13,8))
 plt.hist([data[data['Survived']==1]['Fare'],data[data['Survived']==0]['Fare']], stacked=True, color = ['g','r'],
@@ -39,18 +39,18 @@ plt.legend()
 challenge 5
 
 
-# x axis:
-# y axis:
-# colour: 
+# x axis: age
+# y axis: fare
+# colour: survived/dead
 
 ax.scatter(data[data['Survived']==1]['Age'],data[data['Survived']==1]['Fare'],c='green',s=40)
 ax.scatter(data[data['Survived']==0]['Age'],data[data['Survived']==0]['Fare'],c='red',s=40)
 
 challenge 6
 
-# x axis:
-# y axis:
-# colour: 
+# x axis: survived/dead
+# y axis: number of passengers
+# colour: embarkation classes - S,C,Q
 
 survived_embark = data[data['Survived']==1]['Embarked'].value_counts()
 dead_embark = data[data['Survived']==0]['Embarked'].value_counts()
